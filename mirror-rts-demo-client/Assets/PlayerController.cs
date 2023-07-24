@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour
 {
+    [SyncVar]
     public float horizontalInput = 0f;
+    [SyncVar]
     public float verticalInput = 0f;
     public float moveSpeed = 5f;
 
@@ -26,7 +28,28 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isLocalPlayer) {
+            InputAxios();
+        }
+    }
 
+    private void InputAxios()
+    {
+        var newHorizontalInput = Input.GetAxisRaw("Horizontal");
+        var hasHorizontalInputChanged = newHorizontalInput != horizontalInput;
+        var newVerticalInput = Input.GetAxisRaw("Vertical");
+        var hasVerticalInputChanged = newVerticalInput != verticalInput;
+        if (hasHorizontalInputChanged || hasVerticalInputChanged)
+        {
+            CmdSetInput(newHorizontalInput, newVerticalInput);
+        }
+    }
+
+    [Command]
+    void CmdSetInput(float horizontal, float vertical)
+    {
+        horizontalInput = horizontal;
+        verticalInput = vertical;
     }
 
     private void MovePlayer()
