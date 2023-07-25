@@ -51,7 +51,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   startPosition: {x: 0, y: 0, z: 0}
-  deathRadius: 100
+  deathRadius: 20
   speed: 5
 --- !u!114 &-1825584069778974346
 MonoBehaviour:
