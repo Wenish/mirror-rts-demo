@@ -33,7 +33,6 @@ public class NpcController : NetworkBehaviour
     [Server]
     void Move()
     {
-        Debug.Log("Npc Move");
         var newPostion = transform.position + (direction * (Time.deltaTime * speed));
         float distance = Vector3.Distance(newPostion, startPosition);
         if (distance > deathRadius)
